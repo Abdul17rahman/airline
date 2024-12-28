@@ -1,0 +1,31 @@
+{% extends 'flights/layout.html' %} {% block body %}
+
+<h1>Flight {{ flight.id }}</h1>
+
+<ul>
+  <li>Origin: {{ flight.origin }}</li>
+  <li>Destination: {{ flight.destination }}</li>
+  <li>Duration: {{ flight.duration }}</li>
+  <li>Available Seats: {{ flight.seats }}</li>
+</ul>
+
+<a href="{% url 'book' flight.id %}">Book</a>
+
+<h2>Passengers</h2>
+
+{% if not flight.passengers.all %}
+<p>No booked passengers yet.</p>
+
+{% else %}
+<ul>
+  {% for passenger in flight.passengers.all %}
+  <li>
+    {{ passenger.fullname }}
+    <a href="{% url 'remove' flight.id passenger.id %}">Remove</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endif %}
+<a href="{% url 'index' %}">All flights</a>
+{% endblock %}

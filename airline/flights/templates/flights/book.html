@@ -1,0 +1,29 @@
+{% extends 'flights/layout.html' %} {% block body %}
+<h1>Booking Page.</h1>
+
+<h3>Flight Details</h3>
+<p>
+  <strong>Origin:</strong> {{ flight.origin }} -
+  <strong>Destionation:</strong> {{ flight.destination }}
+</p>
+
+<h3>Enter Passenger Details</h3>
+
+<form action="{% url 'book' flight.id %}" method="post">
+  {% csrf_token %}
+
+  <div>
+    <label for="fullname">Fullname:</label>
+    <input type="text" name="fullname" id="fullname" />
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input type="text" name="email" id="email" />
+  </div>
+
+  <button type="submit">Book</button>
+</form>
+
+<a href="{% url 'flight' flight.id %}">Cancel</a>
+{% endblock %}

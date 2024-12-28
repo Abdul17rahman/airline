@@ -1,0 +1,39 @@
+{% extends 'flights/layout.html' %} {% block body %}
+<h1>Add a Flight.</h1>
+
+<form action="{% url 'add' %}" method="post">
+  {% csrf_token %}
+
+  <div>
+    <label for="origin">Origin:</label>
+    <select name="origin" id="origin">
+      {% for airport in airports %}
+      <option value="{{ airport.id }}">{{ airport.city }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <label for="destination">Destination:</label>
+    <select name="destination" id="destination">
+      {% for airport in airports %}
+      <option value="{{ airport.id }}">{{ airport.city }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <label for="duration">Duration:</label>
+    <input type="number" name="duration" id="" />
+  </div>
+
+  <div>
+    <label for="seats">Seats:</label>
+    <input type="number" name="seats" id="seats" />
+  </div>
+
+  <button type="submit">Add Flight</button>
+</form>
+
+<a href="{% url 'index' %}">Cancel</a>
+{% endblock %}
